@@ -16,9 +16,9 @@
 
 package org.springframework.boot.actuate.endpoint.jmx;
 
-import java.util.List;
-
 import org.springframework.boot.actuate.endpoint.Operation;
+
+import java.util.List;
 
 /**
  * An operation on a JMX endpoint.

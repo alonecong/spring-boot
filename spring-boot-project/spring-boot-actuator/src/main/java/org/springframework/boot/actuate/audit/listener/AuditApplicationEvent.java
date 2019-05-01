@@ -16,12 +16,12 @@
 
 package org.springframework.boot.actuate.audit.listener;
 
-import java.time.Instant;
-import java.util.Map;
-
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.util.Assert;
+
+import java.time.Instant;
+import java.util.Map;
 
 /**
  * Spring {@link ApplicationEvent} to encapsulate {@link AuditEvent}s.

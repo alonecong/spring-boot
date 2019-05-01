@@ -16,13 +16,13 @@
 
 package org.springframework.boot.actuate.endpoint.invoker.cache;
 
-import java.util.Map;
-import java.util.Objects;
-
 import org.springframework.boot.actuate.endpoint.InvocationContext;
 import org.springframework.boot.actuate.endpoint.invoke.OperationInvoker;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
+
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * An {@link OperationInvoker} that caches the response of an operation with a

@@ -16,14 +16,14 @@
 
 package org.springframework.boot.actuate.endpoint.invoke.reflect;
 
-import java.lang.reflect.Method;
-import java.util.Locale;
-
 import org.springframework.boot.actuate.endpoint.OperationType;
 import org.springframework.boot.actuate.endpoint.invoke.OperationParameters;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.util.Assert;
+
+import java.lang.reflect.Method;
+import java.util.Locale;
 
 /**
  * Information describing an operation method on an endpoint method.

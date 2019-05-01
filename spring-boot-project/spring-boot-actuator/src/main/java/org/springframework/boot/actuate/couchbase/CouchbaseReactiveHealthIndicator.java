@@ -17,11 +17,10 @@ package org.springframework.boot.actuate.couchbase;
 
 import com.couchbase.client.core.message.internal.DiagnosticsReport;
 import com.couchbase.client.java.Cluster;
-import reactor.core.publisher.Mono;
-
 import org.springframework.boot.actuate.health.AbstractReactiveHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.ReactiveHealthIndicator;
+import reactor.core.publisher.Mono;
 
 /**
  * A {@link ReactiveHealthIndicator} for Couchbase.

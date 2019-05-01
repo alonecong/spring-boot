@@ -16,10 +16,6 @@
 
 package org.springframework.boot.actuate.endpoint.web.annotation;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 import org.springframework.boot.actuate.endpoint.EndpointFilter;
 import org.springframework.boot.actuate.endpoint.EndpointId;
 import org.springframework.boot.actuate.endpoint.Operation;
@@ -32,6 +28,10 @@ import org.springframework.boot.actuate.endpoint.web.PathMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.util.ClassUtils;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * {@link EndpointDiscoverer} for {@link ExposableServletEndpoint servlet endpoints}.

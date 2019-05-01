@@ -16,13 +16,7 @@
 
 package org.springframework.boot.actuate.endpoint.web.annotation;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.reactivestreams.Publisher;
-
 import org.springframework.boot.actuate.endpoint.EndpointId;
 import org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation;
 import org.springframework.boot.actuate.endpoint.annotation.DiscoveredOperationMethod;
@@ -32,6 +26,11 @@ import org.springframework.boot.actuate.endpoint.web.WebOperation;
 import org.springframework.boot.actuate.endpoint.web.WebOperationRequestPredicate;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.util.ClassUtils;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A discovered {@link WebOperation web operation}.

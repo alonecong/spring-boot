@@ -16,22 +16,21 @@
 
 package org.springframework.boot.actuate.elasticsearch;
 
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.elasticsearch.client.Request;
 import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
-
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.util.StreamUtils;
+
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * {@link HealthIndicator} for an Elasticsearch cluster using a {@link RestClient}.

@@ -16,14 +16,14 @@
 
 package org.springframework.boot.actuate.audit;
 
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.util.List;
-
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * {@link Endpoint} to expose audit events.

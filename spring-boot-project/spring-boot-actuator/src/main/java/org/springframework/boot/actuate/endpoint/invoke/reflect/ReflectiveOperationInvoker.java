@@ -16,11 +16,6 @@
 
 package org.springframework.boot.actuate.endpoint.invoke.reflect;
 
-import java.lang.reflect.Method;
-import java.security.Principal;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.boot.actuate.endpoint.InvocationContext;
 import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.boot.actuate.endpoint.invoke.MissingParametersException;
@@ -30,6 +25,11 @@ import org.springframework.boot.actuate.endpoint.invoke.ParameterValueMapper;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
+
+import java.lang.reflect.Method;
+import java.security.Principal;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * An {@code OperationInvoker} that invokes an operation using reflection.

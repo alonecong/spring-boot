@@ -17,13 +17,12 @@ package org.springframework.boot.actuate.cassandra;
 
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
-import reactor.core.publisher.Mono;
-
 import org.springframework.boot.actuate.health.AbstractReactiveHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.ReactiveHealthIndicator;
 import org.springframework.data.cassandra.core.ReactiveCassandraOperations;
 import org.springframework.util.Assert;
+import reactor.core.publisher.Mono;
 
 /**
  * A {@link ReactiveHealthIndicator} for Cassandra.

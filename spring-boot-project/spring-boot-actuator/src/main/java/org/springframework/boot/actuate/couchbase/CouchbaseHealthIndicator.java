@@ -18,7 +18,6 @@ package org.springframework.boot.actuate.couchbase;
 
 import com.couchbase.client.core.message.internal.DiagnosticsReport;
 import com.couchbase.client.java.Cluster;
-
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;

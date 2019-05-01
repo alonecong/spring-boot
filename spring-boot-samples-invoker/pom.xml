@@ -14,7 +14,9 @@
 	<description>Spring Boot Samples Invoker</description>
 	<properties>
 		<main.basedir>${basedir}/..</main.basedir>
+		<disable.checks>true</disable.checks>
 	</properties>
+
 	<build>
 		<plugins>
 			<plugin>

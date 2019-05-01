@@ -16,16 +16,15 @@
 
 package org.springframework.boot.actuate.elasticsearch;
 
-import java.util.Map;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
+
+import java.util.Map;
 
 /**
  * {@link HealthIndicator} for Elasticsearch using a {@link JestClient}.

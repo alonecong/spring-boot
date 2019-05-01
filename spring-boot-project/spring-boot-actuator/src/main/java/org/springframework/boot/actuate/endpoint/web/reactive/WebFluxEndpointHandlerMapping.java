@@ -16,21 +16,17 @@
 
 package org.springframework.boot.actuate.endpoint.web.reactive;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver;
-import org.springframework.boot.actuate.endpoint.web.EndpointMapping;
-import org.springframework.boot.actuate.endpoint.web.EndpointMediaTypes;
-import org.springframework.boot.actuate.endpoint.web.ExposableWebEndpoint;
-import org.springframework.boot.actuate.endpoint.web.Link;
+import org.springframework.boot.actuate.endpoint.web.*;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * A custom {@link HandlerMapping} that makes web endpoints available over HTTP using
