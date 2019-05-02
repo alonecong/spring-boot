@@ -61,7 +61,7 @@ import org.springframework.util.StringUtils;
  * <p>
  * If your needs are simpler, consider using the static convenience methods in
  * SpringApplication instead.
- *
+ * 用于替代SpringApplication 的一些方法，使用builder方式实现
  * @author Dave Syer
  * @author Andy Wilkinson
  * @see SpringApplication
@@ -273,6 +273,7 @@ public class SpringApplicationBuilder {
 	 * Explicitly set the context class to be used.
 	 * @param cls the context class to use
 	 * @return the current builder
+	 * 关联当前应用的ApplicationContext实现类
 	 */
 	public SpringApplicationBuilder contextClass(
 			Class<? extends ConfigurableApplicationContext> cls) {
@@ -284,6 +285,7 @@ public class SpringApplicationBuilder {
 	 * Add more sources (configuration classes and components) to this application.
 	 * @param sources the sources to add
 	 * @return the current builder
+	 * 用于增加数据源到当前上下文 ，可配置的class和组件，请注意xml或者packages等无法作为配置源加入进来
 	 */
 	public SpringApplicationBuilder sources(Class<?>... sources) {
 		this.sources.addAll(new LinkedHashSet<>(Arrays.asList(sources)));
@@ -306,6 +308,7 @@ public class SpringApplicationBuilder {
 	 * Flag to indicate the startup information should be logged.
 	 * @param logStartupInfo the flag to set. Default true.
 	 * @return the current builder
+	 * 启动时候输出日志，默认是true
 	 */
 	public SpringApplicationBuilder logStartupInfo(boolean logStartupInfo) {
 		this.application.setLogStartupInfo(logStartupInfo);
@@ -317,12 +320,18 @@ public class SpringApplicationBuilder {
 	 * static banner file is provided.
 	 * @param banner the banner to use
 	 * @return the current builder
+	 * 设置当前banner实现类
 	 */
 	public SpringApplicationBuilder banner(Banner banner) {
 		this.application.setBanner(banner);
 		return this;
 	}
 
+	/**
+	 * 设置当前banner.Mode 包括Log，console，关闭
+	 * @param bannerMode
+	 * @return
+	 */
 	public SpringApplicationBuilder bannerMode(Banner.Mode bannerMode) {
 		this.application.setBannerMode(bannerMode);
 		return this;
@@ -344,6 +353,7 @@ public class SpringApplicationBuilder {
 	 * registered.
 	 * @param registerShutdownHook if the shutdown hook should be registered
 	 * @return the current builder
+	 * 设置是否让当前上下文注册shutdownHook 钩子
 	 */
 	public SpringApplicationBuilder registerShutdownHook(boolean registerShutdownHook) {
 		this.registerShutdownHookApplied = true;
@@ -365,6 +375,7 @@ public class SpringApplicationBuilder {
 	 * Flag to indicate that command line arguments should be added to the environment.
 	 * @param addCommandLineProperties the flag to set. Default true.
 	 * @return the current builder
+	 *  是否添加命令行参数
 	 */
 	public SpringApplicationBuilder addCommandLineProperties(
 			boolean addCommandLineProperties) {
@@ -377,6 +388,7 @@ public class SpringApplicationBuilder {
 	 * application context's {@link Environment}.
 	 * @param addConversionService if the conversion service should be added.
 	 * @return the current builder
+	 * 是否设置添加一些默认的conversionService到应用上下文
 	 * @since 2.1.0
 	 */
 	public SpringApplicationBuilder setAddConversionService(
@@ -441,6 +453,7 @@ public class SpringApplicationBuilder {
 	 * @param defaults the default properties
 	 * @return the current builder
 	 * @see SpringApplicationBuilder#properties(String...)
+	 * 设置默认的属性配置到上下文
 	 */
 	public SpringApplicationBuilder properties(Map<String, Object> defaults) {
 		this.defaultProperties.putAll(defaults);
@@ -464,6 +477,11 @@ public class SpringApplicationBuilder {
 		return this;
 	}
 
+	/**
+	 * 添加附加的 SpringProfiles
+	 * @param additionalProfiles
+	 * @return
+	 */
 	private SpringApplicationBuilder additionalProfiles(
 			Collection<String> additionalProfiles) {
 		this.additionalProfiles = new LinkedHashSet<>(additionalProfiles);
@@ -477,6 +495,7 @@ public class SpringApplicationBuilder {
 	 * context.
 	 * @param beanNameGenerator the generator to set.
 	 * @return the current builder
+	 * 设置@configuration bean名称的生成器实现
 	 */
 	public SpringApplicationBuilder beanNameGenerator(
 			BeanNameGenerator beanNameGenerator) {
@@ -488,6 +507,8 @@ public class SpringApplicationBuilder {
 	 * Environment for the application context.
 	 * @param environment the environment to set.
 	 * @return the current builder
+	 * 当前应用的environment的实现类
+	 * StandardReactiveWebEnvironment & StandardServletEnvironment 实现于 StandardEnvironment，
 	 */
 	public SpringApplicationBuilder environment(ConfigurableEnvironment environment) {
 		this.application.setEnvironment(environment);
@@ -500,6 +521,7 @@ public class SpringApplicationBuilder {
 	 * needed, this is where it would be added.
 	 * @param resourceLoader the resource loader to set.
 	 * @return the current builder
+	 * 设置当前的资源加载器
 	 */
 	public SpringApplicationBuilder resourceLoader(ResourceLoader resourceLoader) {
 		this.application.setResourceLoader(resourceLoader);
@@ -510,6 +532,7 @@ public class SpringApplicationBuilder {
 	 * Add some initializers to the application (applied to the {@link ApplicationContext}
 	 * before any bean definitions are loaded).
 	 * @param initializers some initializers to add
+	 *   追加一些  ApplicationContextInitializer
 	 * @return the current builder
 	 */
 	public SpringApplicationBuilder initializers(
@@ -524,6 +547,7 @@ public class SpringApplicationBuilder {
 	 * also {@link ApplicationContextInitializer} will be added to the
 	 * {@link #initializers(ApplicationContextInitializer...) initializers} automatically.
 	 * @param listeners some listeners to add
+	 * 追加一些 ApplicationListener
 	 * @return the current builder
 	 */
 	public SpringApplicationBuilder listeners(ApplicationListener<?>... listeners) {
