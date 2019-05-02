@@ -453,7 +453,7 @@ public class SpringApplicationBuilder {
 	 * @param defaults the default properties
 	 * @return the current builder
 	 * @see SpringApplicationBuilder#properties(String...)
-	 * 设置默认的属性配置到上下文
+	 * 设置默认的属性配置到上下文，配置属性外部化
 	 */
 	public SpringApplicationBuilder properties(Map<String, Object> defaults) {
 		this.defaultProperties.putAll(defaults);

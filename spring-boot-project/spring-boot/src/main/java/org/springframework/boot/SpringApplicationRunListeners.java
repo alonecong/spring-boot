@@ -36,7 +36,7 @@ class SpringApplicationRunListeners {
 	private final Log log;
 
 	private final List<SpringApplicationRunListener> listeners;
-
+//【2-1】 添加SpringApplicationRunListener 的实现类到集合
 	SpringApplicationRunListeners(Log log,
 			Collection<? extends SpringApplicationRunListener> listeners) {
 		this.log = log;
@@ -48,37 +48,37 @@ class SpringApplicationRunListeners {
 			listener.starting();
 		}
 	}
-
+//	ConfigurableEnvironment已经准备好，允许将其调整
 	public void environmentPrepared(ConfigurableEnvironment environment) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			listener.environmentPrepared(environment);
 		}
 	}
-
+	//	ConfigurableApplicationContext已经准备好，允许将其调整
 	public void contextPrepared(ConfigurableApplicationContext context) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			listener.contextPrepared(context);
 		}
 	}
-
+//	ConfigurableApplicationContext 上下文已经加载
 	public void contextLoaded(ConfigurableApplicationContext context) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			listener.contextLoaded(context);
 		}
 	}
-
+//上下文启动
 	public void started(ConfigurableApplicationContext context) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			listener.started(context);
 		}
 	}
-
+//运行
 	public void running(ConfigurableApplicationContext context) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			listener.running(context);
 		}
 	}
-
+//失败调用 callFailedListener
 	public void failed(ConfigurableApplicationContext context, Throwable exception) {
 		for (SpringApplicationRunListener listener : this.listeners) {
 			callFailedListener(listener, context, exception);

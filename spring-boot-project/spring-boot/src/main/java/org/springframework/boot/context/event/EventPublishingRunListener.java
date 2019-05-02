@@ -41,15 +41,21 @@ import org.springframework.util.ErrorHandler;
  * @author Stephane Nicoll
  * @author Andy Wilkinson
  * @author Artsiom Yudovin
+ * 是springboot 运行时监听器，不是事件监听器
  */
 public class EventPublishingRunListener implements SpringApplicationRunListener, Ordered {
 
 	private final SpringApplication application;
 
 	private final String[] args;
-
+//	SimpleApplicationEventMulticaster 实现于ApplicationEventMulticaster 属于spring ，发布事件
 	private final SimpleApplicationEventMulticaster initialMulticaster;
-
+	/**
+	 * 为了SpringFactoriesLoader.loadFactoryNames 机制
+	 * SpringApplicationRunListener 的实现类 构造参数为 SpringApplication 和 String[]
+	 * 并把这些ApplicationListener加入到 SimpleApplicationEventMulticaster中，
+	 * SimpleApplicationEventMulticaster是用于spring发布事件，在spring 中进行实现。
+	 */
 	public EventPublishingRunListener(SpringApplication application, String[] args) {
 		this.application = application;
 		this.args = args;
@@ -64,6 +70,9 @@ public class EventPublishingRunListener implements SpringApplicationRunListener,
 		return 0;
 	}
 
+	/**
+	 * multicastEvent--->doInvokeListener 最后调用触发回调
+	 */
 	@Override
 	public void starting() {
 		this.initialMulticaster.multicastEvent(
