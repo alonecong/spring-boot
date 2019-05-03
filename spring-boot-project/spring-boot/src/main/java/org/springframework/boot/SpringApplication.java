@@ -266,6 +266,11 @@ public class SpringApplication {
 		this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
 		//判断应用类型
 		this.webApplicationType = WebApplicationType.deduceFromClasspath();
+//		初始化ApplicationContextInitializer
+//		org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer,\
+//		org.springframework.boot.context.ContextIdApplicationContextInitializer,\
+//		org.springframework.boot.context.config.DelegatingApplicationContextInitializer,\
+//		org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer
 		setInitializers((Collection) getSpringFactoriesInstances(
 				ApplicationContextInitializer.class));
 		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
@@ -310,10 +315,12 @@ public class SpringApplication {
 					applicationArguments);
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
+//			创建上下文
 			context = createApplicationContext();
 			exceptionReporters = getSpringFactoriesInstances(
 					SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
+//			初始化一些context一些属性
 			prepareContext(context, environment, listeners, applicationArguments,
 					printedBanner);
 			refreshContext(context);
@@ -345,9 +352,12 @@ public class SpringApplication {
 			SpringApplicationRunListeners listeners,
 			ApplicationArguments applicationArguments) {
 		// Create and configure the environment
+//		创建并配置 environment 资源，根据不同webApplicationType 进行 配置
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
+//		通知 环境变量已经准备完毕
 		listeners.environmentPrepared(environment);
+//		bind environment到上下文
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
 			environment = new EnvironmentConverter(getClassLoader())
@@ -371,8 +381,10 @@ public class SpringApplication {
 	private void prepareContext(ConfigurableApplicationContext context,
 			ConfigurableEnvironment environment, SpringApplicationRunListeners listeners,
 			ApplicationArguments applicationArguments, Banner printedBanner) {
+//		设置上下文的环境变量
 		context.setEnvironment(environment);
 		postProcessApplicationContext(context);
+//		初始化一些ApplicationContextInitializer
 		applyInitializers(context);
 		listeners.contextPrepared(context);
 		if (this.logStartupInfo) {
@@ -380,6 +392,7 @@ public class SpringApplication {
 			logStartupProfileInfo(context);
 		}
 		// Add boot specific singleton beans
+//		容器中加入2个singleton的bean
 		ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
 		beanFactory.registerSingleton("springApplicationArguments", applicationArguments);
 		if (printedBanner != null) {
@@ -390,9 +403,11 @@ public class SpringApplication {
 					.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
 		// Load the sources
+//		加载beanDefinition
 		Set<Object> sources = getAllSources();
 		Assert.notEmpty(sources, "Sources must not be empty");
 		load(context, sources.toArray(new Object[0]));
+//		通知SpringApplicationRunListeners 数组 上下文加载完毕
 		listeners.contextLoaded(context);
 	}
 
@@ -492,7 +507,9 @@ public class SpringApplication {
 			environment.setConversionService(
 					(ConfigurableConversionService) conversionService);
 		}
+//		配置属性property 资源
 		configurePropertySources(environment, args);
+//		配置activeProfiles资源
 		configureProfiles(environment, args);
 	}
 
@@ -586,6 +603,7 @@ public class SpringApplication {
 	 * class before falling back to a suitable default.
 	 * @return the application context (not yet refreshed)
 	 * @see #setApplicationContextClass(Class)
+	 * 根据不同的webApplicationType 创建上下文对象
 	 */
 	protected ConfigurableApplicationContext createApplicationContext() {
 		Class<?> contextClass = this.applicationContextClass;
@@ -708,8 +726,10 @@ public class SpringApplication {
 			logger.debug(
 					"Loading source " + StringUtils.arrayToCommaDelimitedString(sources));
 		}
+//		具体通过BeanDefinitionLoader 和 BeanDefinitionRegistry进行加载这些bean
 		BeanDefinitionLoader loader = createBeanDefinitionLoader(
 				getBeanDefinitionRegistry(context), sources);
+//		beanname生成器和resourceLoader、environment 进行设置
 		if (this.beanNameGenerator != null) {
 			loader.setBeanNameGenerator(this.beanNameGenerator);
 		}
@@ -750,6 +770,7 @@ public class SpringApplication {
 	 * @return the BeanDefinitionRegistry if it can be determined
 	 */
 	private BeanDefinitionRegistry getBeanDefinitionRegistry(ApplicationContext context) {
+//		判断上下文实例的具体类，为什么有2个？
 		if (context instanceof BeanDefinitionRegistry) {
 			return (BeanDefinitionRegistry) context;
 		}

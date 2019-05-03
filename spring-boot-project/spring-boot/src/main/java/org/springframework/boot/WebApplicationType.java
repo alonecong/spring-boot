@@ -59,7 +59,10 @@ public enum WebApplicationType {
 	private static final String SERVLET_APPLICATION_CONTEXT_CLASS = "org.springframework.web.context.WebApplicationContext";
 
 	private static final String REACTIVE_APPLICATION_CONTEXT_CLASS = "org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext";
-
+/**
+ * 通过判断classpath下是否存在该类，进行类型判断，这里简单说下ClassUtils.isPresent
+ * 这个方法设计的如果存在返回true，不存在通过捕获异常的方式返回false操作！！！
+ */
 	static WebApplicationType deduceFromClasspath() {
 		if (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, null)
 				&& !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, null)

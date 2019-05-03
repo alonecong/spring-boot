@@ -49,6 +49,9 @@ public class ContextIdApplicationContextInitializer implements
 	}
 
 	@Override
+	/**
+	 * 初始化时候6个initializer 中的一个，主要就是读取spring.application.name ，如果没有就默认为application
+	 */
 	public void initialize(ConfigurableApplicationContext applicationContext) {
 		ContextId contextId = getContextId(applicationContext);
 		applicationContext.setId(contextId.getId());
@@ -63,7 +66,7 @@ public class ContextIdApplicationContextInitializer implements
 		}
 		return new ContextId(getApplicationId(applicationContext.getEnvironment()));
 	}
-
+//注意这里用的是ConfigurableEnvironment 可配置的环境变量
 	private String getApplicationId(ConfigurableEnvironment environment) {
 		String name = environment.getProperty("spring.application.name");
 		return StringUtils.hasText(name) ? name : "application";
